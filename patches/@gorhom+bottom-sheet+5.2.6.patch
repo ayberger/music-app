@@ -1,0 +1,17 @@
+diff --git a/node_modules/@gorhom/bottom-sheet/src/hooks/useBoundingClientRect.ts b/node_modules/@gorhom/bottom-sheet/src/hooks/useBoundingClientRect.ts
+index cc85c8c..23accaf 100644
+--- a/node_modules/@gorhom/bottom-sheet/src/hooks/useBoundingClientRect.ts
++++ b/node_modules/@gorhom/bottom-sheet/src/hooks/useBoundingClientRect.ts
+@@ -58,7 +58,11 @@ export function useBoundingClientRect(
+     // @ts-ignore 👉 https://github.com/facebook/react/commit/53b1f69ba
+     if (ref.current.unstable_getBoundingClientRect !== null) {
+       // @ts-ignore https://github.com/facebook/react/commit/53b1f69ba
+-      const layout = ref.current.unstable_getBoundingClientRect();
++      const getRect = ref.current?.getBoundingClientRect ?? ref.current?.unstable_getBoundingClientRect;
++      if (!getRect) return;
++      
++      const layout = getRect.call(ref.current);
++
+       handler(layout);
+       return;
+     }
