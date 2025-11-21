@@ -2,7 +2,6 @@
   "name": "music-app",
   "version": "0.0.1",
   "private": true,
-  
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -21,6 +20,7 @@
     "@react-navigation/native-stack": "^7.3.28",
     "axios": "^1.13.2",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "react": "19.1.1",
     "react-native": "0.82.0",

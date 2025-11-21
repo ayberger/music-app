@@ -25,8 +25,23 @@ export default function MiniPlayer() {
   const progress =
     duration > 0 ? Math.min(Math.max(position / duration, 0), 1) : 0;
 
-  const openRadio = () =>
-    (nav as any).navigate("Tabs", { screen: "Radio" });
+  const openRadio = () => {
+  // Hiç şarkı yoksa, sadece Radio tab'ına git
+    if (!currentTrack) {
+      (nav as any).navigate("Tabs", { screen: "Radio" });
+      return;
+    }
+
+    // Spotify + YouTube ile çalan şarkıyı RadioScreen'e parametre olarak gönder
+    (nav as any).navigate("Tabs", {
+      screen: "Radio",
+      params: {
+        queue: [currentTrack],          // tek elemanlı kuyruk
+        selectedId: currentTrack.id,    // bu şarkı seçili
+      },
+    });
+  };
+
 
   const onToggle = (e: any) => {
     e.stopPropagation(); // üstteki Pressable'a gitmesin
